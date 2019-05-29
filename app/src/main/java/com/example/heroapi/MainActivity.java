@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import heroesapi.HeroesAPI;
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         String name = etName.getText().toString();
         String desc = etDesc.getText().toString();
 
+        Map<String,String> map = new HashMap<>();
+        map.put("name", name);
+        map.put("desc", desc);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Url.BASE_URL)
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         HeroesAPI heroesAPI = retrofit.create(HeroesAPI.class);
 
-        Call<Void> heroCall = heroesAPI.addHero(name, desc);
+        Call<Void> heroCall = heroesAPI.addHero(map);
 
         heroCall.enqueue(new Callback<Void>() {
             @Override
