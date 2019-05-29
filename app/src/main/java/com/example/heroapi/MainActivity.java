@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         String name = etName.getText().toString();
         String desc = etDesc.getText().toString();
 
-        Heroes heroes = new Heroes(name,desc);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Url.BASE_URL)
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         HeroesAPI heroesAPI = retrofit.create(HeroesAPI.class);
 
-        Call<Void> heroCall = heroesAPI.addHero(heroes);
+        Call<Void> heroCall = heroesAPI.addHero(name, desc);
 
         heroCall.enqueue(new Callback<Void>() {
             @Override
